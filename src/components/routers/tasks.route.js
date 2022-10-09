@@ -1,9 +1,10 @@
+const { getTasks, getTasksByUser, postTask } = require('../controllers/tasks.controller');
+
 const router = require('express').Router();
-const {
-    getUsers,
-    getUser,
-    postUser,
-    putUser,
-    deleteUser
-} = require('../controllers/user.controller');
-const { route } = require('./home.routes');
+
+router.get('/tasks', getTasks);
+router.get('/tasks/:userId', getTasksByUser);
+router.post('/tasks', postTask);
+
+
+module.exports = router;

@@ -16,9 +16,13 @@ const port = process.env.PORT || 3000;
 
 
 //MIDDLEWARES
-app.use (express.json())
+app.use(express.json())
 app.use(cors())
 app.use(morgan("combined"))
 
+//IMPORTAR RUTAS
+app.use(require("./components/routers/tasks.route"));
+app.use(require("./components/routers/users.route"));
 
-app.listen(port, () => console.log(`Servidor corriendo en http://localhost:${port}`));
+
+app.listen(port, ()=> console.log(`Servidor corriendo en http://localhost:${port}`));
