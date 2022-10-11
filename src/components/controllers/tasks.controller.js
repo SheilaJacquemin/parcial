@@ -43,7 +43,8 @@ controller.postTask = async (req,res)=>{
         // GUARDAR TAREA EN LA BASE DE DATOS
         const task = await newTask.save();
         return res.status(200).json({
-            msg: 'Tarea creada exitosamente :)'
+            msg: 'Tarea creada exitosamente :)',
+            task
         })
     } catch (error) {
         console.log(error)
