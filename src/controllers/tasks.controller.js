@@ -6,10 +6,10 @@ const controller = {}
 controller.getTasks = async (req,res)=>{
     try {
         const tasks = await Task.find()
-        return res.status(200).json(tasks)
+        return res.json(tasks)
     } catch (error) {
         console.log(error)
-        return res.status(400).json({
+        return res.json({
             msg: 'Error en la obtención de tareas'
         })
     }
@@ -21,10 +21,10 @@ controller.getTasksByUser = async (req,res)=>{
         const id = req.params.userId;
         console.log(req.params)
         const tasks = await Task.find({userId:id})
-        return res.status(200).json(tasks)
+        return res.json(tasks)
     } catch (error) {
         console.log(error)
-        return res.status(400).json({
+        return res.json({
             msg: 'Error en la obtención de tareas'
         })
     }
