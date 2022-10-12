@@ -56,7 +56,7 @@ controller.postTask = async (req,res)=>{
 
 //EDITAR TAREA
 controller.putTasks = async (req,res)=>{
-    const idTask = req.params("idTask")
+    const idTask = req.params["idTask"]
     try {
         const {title, description} = req.body
         const TaskAct = {
@@ -81,7 +81,7 @@ controller.putTasks = async (req,res)=>{
 //ELIMINAR LA TAREA
 controller.deleteTasks = async (req,res)=>{
     try {
-        const idTask = req.params("idTask")
+        const idTask = req.params["idTask"]
         Task.findByIdAndDelete(idTask).exec()
         return res.json({
             msg:"Tarea eliminada con éxito",
@@ -93,9 +93,5 @@ controller.deleteTasks = async (req,res)=>{
         })
     }
 }
-
-
-
-
 
 module.exports = controller;
