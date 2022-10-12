@@ -54,6 +54,48 @@ controller.postTask = async (req,res)=>{
     }
 };
 
+//EDITAR TAREA
+controller.putTasks = async (req,res)=>{
+    const idTask = req.params("idTask")
+    try {
+        const {title, description} = req.body
+        const TaskAct = {
+            title,
+            description
+
+        }
+        const newTask = await Task.findByIdAndUpdate(idTask,TaskAct)
+        return res.json({
+            msg:"Tarea Actualizada",
+            newTask
+        }
+            
+        )
+    } catch (error) {
+        return res.json({
+            msg: 'No se pudo actualizar la tarea'
+        })
+    }
+};
+
+//ELIMINAR LA TAREA
+controller.deleteTasks = async (req,res)=>{
+    try {
+        const idTask = req.params("idTask")
+        Task.findByIdAndDelete(idTask).exec()
+        return res.json({
+            msg:"Tarea eliminada con éxito",
+        })
+    }
+    catch (error) {
+        return res.json({
+            msg: 'No se pudo eliminar la tarea'
+        })
+    }
+}
+
+
+
 
 
 module.exports = controller;

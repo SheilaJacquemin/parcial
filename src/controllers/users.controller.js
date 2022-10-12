@@ -43,6 +43,45 @@ controller.postUser = async (req,res)=>{
     }
 };
 
+//EDITAR UN USUARIO
+controller.putUser = async (req,res)=>{
+    try {
+        const idUser = req.params.idUser;
+        const {username,password} = req.body;
+        if(!idUser || !password || !username) {
+            return res.json({
+                msg: 'No se encuentra id o información en la petición.',
+        })
+        }
+        const newPassword = bcrypt.hashSync(password,10)
+        await User.updateOne({password:newPassword , username});
+        return res.json({
+            message: `Usuario modificado correctamente.`
+        })
+    } catch (error) {
+        return res.json({
+            msg: 'Error al modificar'
+        })
+    }
+};
+
+//ELIMINAR UN USUARIO 
+controller.deleteUser = async (req,res)=>{
+    try {
+        const idUser = req.params.idUser;
+        if(!idUser) {
+            return res.json({
+                msg: 'No se encuentra id',
+        })
+        } return res.json({
+            msg: 'Usuario eliminado correctamente'
+        })
+    } catch (error) {
+        return res.json({
+            msg: 'Error al eliminar el usuario'
+        })
+    }
+}
 
 
 module.exports = controller;

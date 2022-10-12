@@ -4,10 +4,12 @@ const TaskSchema = new Schema({
     title: {
         type: Schema.Types.String,
         required: true,
+        unique: true
     },
     description: {
         type: Schema.Types.String,
-        required: true
+        required: true,
+        unique: true
     },
     isActive: {
         type: Schema.Types.Boolean,

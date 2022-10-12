@@ -15,7 +15,7 @@ const validarJWT = async (req, res, next) => {
 
     try {
         // Se comprueba la validez del token, si es válido, se obtiene el id del usuario del mismo
-        const { uid } = await jwt.verify(token, process.env.SECRET)
+        const { uid } = jwt.verify(token, process.env.SECRET)
 
         // Se busca el usuario en la base de datos para saber si pertenece al sistema
         const usuario = await User.findById(uid)
