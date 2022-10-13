@@ -4,7 +4,7 @@ const generateJWT = (USER) => {
     return new Promise((resolve, reject) =>{
         /* Generate a token with idUser and a secret word */
         jwt.sign(USER, process.env.SECRET,{
-            expiresIn: '1h'
+            expiresIn: '10h'
         }, (err, token) => {
             if(err){
                 reject(`No se pudo generar el token: ${err.message}`);//TODO:Salida del error
