@@ -57,12 +57,18 @@ controller.postTask = async (req,res)=>{
 //EDITAR TAREA
 controller.putTasks = async (req,res)=>{
     const idTask = req.params["idTask"]
+    const userId = req.user
     try {
         const {title, description} = req.body
         const TaskAct = {
             title,
             description
 
+        };
+        if(TaskAct.userId!=userId){
+            return res.json({
+                msg: "No autorizado"
+            })
         }
         const newTask = await Task.findByIdAndUpdate(idTask,TaskAct)
         return res.json({
@@ -82,6 +88,12 @@ controller.putTasks = async (req,res)=>{
 controller.deleteTasks = async (req,res)=>{
     try {
         const idTask = req.params["idTask"]
+        const userId = req.user
+        if (idTask.userId!=userId) {
+            return res.json({
+                msg: "No autorizado"
+            })
+        }
         Task.findByIdAndDelete(idTask).exec()
         return res.json({
             msg:"Tarea eliminada con éxito",
